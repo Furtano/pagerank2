@@ -23,8 +23,6 @@ public class Node {
 	double oldPageRank;
 	// pi (Zwischenschritt)
 	double WSK;
-	
-	String content;
 	List<Double> transitionProbability;
 
 	public Node() {
@@ -130,10 +128,6 @@ public class Node {
 	 */
 	public void addTransitionProbability(int index, double probability) {
 		transitionProbability.add(index, probability);
-	}
-	
-	public void addNode(){
-		
 	}
 
 }

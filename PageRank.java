@@ -97,13 +97,13 @@ public class PageRank {
         FileReader fr = new FileReader(filename);
         BufferedReader br = new BufferedReader(fr);
         String line = "";
-        
+        Node newNode;
         int i = 0;
         do {
             line = br.readLine();
             System.out.println(line);
             if (line != null) {
-            	Node newNode;
+
 
 
 
@@ -122,21 +122,11 @@ public class PageRank {
                     }
                     // Node doesnt Exist, CREATE ONE
                     if (!nodeAlreadyExistent) {
-                        System.out.println("NEW NODE" + newNode.getName());
-                    	 ///////
-                    	//////////////////////////////////////////////////////////////////////////////
-                        newNode.setContent(Crawler.nodeContent.get(Integer.valueOf(line.replace("+++++++", "").replace("d0", ""))-1));
-                        Classen_Beleg_1.indexer.addToIndex(newNode);
-
+//                        System.out.println("NEW NODE");
                         nodeList.add(newNode);
-                        
-                        
-                       
-                        System.out.println("MEEEEEEEEEEEE; " + newNode.getName() + "i " + i + "CON" + Crawler.nodeContent.get(i));
-                        
-                        i++;
+
                     }
-                    
+                    i++;
 
                 } // New Link
                 else {
@@ -160,11 +150,8 @@ public class PageRank {
                             // Add as new Node
                             Node link = new Node();
                             link.setName(token);
-                            link.setContent(Crawler.nodeContent.get(Integer.valueOf(token.replace("d0", ""))-1));
-                            Classen_Beleg_1.indexer.addToIndex(link);
                             nodeList.add(link);
-                            
-                            
+
                             // Add Link
 //                            System.out.println("NEW NODE -> NEW LINK" + token);
                             nodeList.get(i - 1).addOutgoingLink(token);
@@ -181,7 +168,6 @@ public class PageRank {
             }
         } while (line != null);
 
-        Classen_Beleg_1.indexer.close();
         return nodeList;
     }
 

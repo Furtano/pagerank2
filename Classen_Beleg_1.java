@@ -11,44 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.IndexWriterConfig;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.store.Directory;
-import org.apache.lucene.store.RAMDirectory;
-import org.apache.lucene.util.Version;
 /**
  *
  * @author chris
  */
 public class Classen_Beleg_1 {
 	private static Logger log;
-	public static Indexer indexer;
-	
 	
     /**
      * @param args the command line arguments
-     * @throws ParseException 
      */
-	
-	public Classen_Beleg_1 () {
-		
-	}
-    public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
-    	indexer = new Indexer("http://mysql12.f4.htw-berlin.de/crawl/");
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         // TODO code application logic here
-
-        Controller controller = new Controller();
-
-        try {
-            controller.start();
-        } catch (Exception ex) {
-            Logger.getLogger(Classen_Beleg_1.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    	System.out.println("Test");
+//        File lagerDatei = new File("crawler.txt");
+//        
+//        if (lagerDatei.exists()){
+//            lagerDatei.delete();
+//        }
+//
+//
+//        Controller controller = new Controller();
+//
+//        try {
+//            controller.start();
+//        } catch (Exception ex) {
+//            Logger.getLogger(Classen_Beleg_1.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    	System.out.println("Test");
 
 
         List<Node> nodeList = new ArrayList<Node>();
@@ -56,7 +46,7 @@ public class Classen_Beleg_1 {
 
 
 
-        List<Node> nodeList2 = PageRank.readNodesFromFile("//home//chris//workspace//Classen_Beleg_1//crawler123.txt");
+        List<Node> nodeList2 = PageRank.readNodesFromFile("crawler.txt");
         PageRank.getIncomingLinksFromNodeList(nodeList2);
 
         // Initialize all Nodes with Beginning PR
@@ -70,35 +60,31 @@ public class Classen_Beleg_1 {
         }
         
         
-        
-        
-       
-        PageRank.calcPageRank(nodeList2);
+
+        // JUST DO THIS 1x
+//        PageRank.calcTransitionProhability(nodeList2);
+        ///
+        // DEBUG PURPOSE
+//        for (Node singleNode : nodeList2) {
+//            singleNode.printLinks();
+//        }
+
+
+
+//
+//        System.out.println("\n");
+//        for (Node singleNode : nodeList2) {
+//            singleNode.printWSK();
+//            System.out.print("\t");
+//        }
+//        System.out.println("\n");
+//        double oldPR = 0;
+
                
 
-       
-        try {
-			IndexerItem[] docs = indexer.search("tokens");
-			
-////			indexer.combinePagerankAndIndex(pr, docs, MyCrawler.nodes);
-			for (IndexerItem iitem : docs) {
-				System.out.println(iitem.getName() + ":" + iitem.getScore());
-			}
-			docs = indexer.search("index");
-			for (IndexerItem iitem : docs) {
-				System.out.println(iitem.getName() + ":" + iitem.getScore());
-			}
-			docs = indexer.search("classification");
-			for (IndexerItem iitem : docs) {
-				System.out.println(iitem.getName() + ":" + iitem.getScore());
-			}
-        }
-			catch (IOException e )
-			{
-				e.printStackTrace();
-			}
+        PageRank.calcPageRank(nodeList2);
+
         
-     System.out.println("HHH: " + Crawler.nodeContent.get(7));
         
 
 

@@ -27,8 +27,7 @@ public class Crawler extends WebCrawler {
     private final static String VISIT_PATTERN = ".*\\.html";
     public List<String> visitedPages = new ArrayList<String>();
     DataHelper dh;
-    int counter = 0;
-    public static List<String> nodeContent;
+  
 
     public List<String> getVisitedPages() {
         return visitedPages;
@@ -36,7 +35,7 @@ public class Crawler extends WebCrawler {
 
     public Crawler() throws IOException {
      
-    	nodeContent = new ArrayList();
+
         dh = new DataHelper();
     }
 
@@ -75,8 +74,6 @@ public class Crawler extends WebCrawler {
                 String text = htmlParseData.getText();
                 String html = htmlParseData.getHtml();
                 List<WebURL> links = htmlParseData.getOutgoingUrls();
-                
-
 
                 //			System.out.println("Text length: " + text.length());
                 //			System.out.println("Html length: " + html.length());
@@ -84,10 +81,10 @@ public class Crawler extends WebCrawler {
                 //			System.out.println("HITTING URL: " + page.getWebURL());
 
                 if (!url.equals("http://mysql12.f4.htw-berlin.de/crawl/")) {
-                    nodeContent.add(text);
+
                     dh.writeLink("+++++++" + url + "+++++++", true);
 
-                    System.out.println("URL::::" + url);
+//                    System.out.println("URL::::" + url);
 
                     for (int i = 0; i < links.size(); i++) {
 
@@ -113,8 +110,6 @@ public class Crawler extends WebCrawler {
 
 
             }
-            
-            counter++;
 
         } catch (IOException ex) {
             Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
